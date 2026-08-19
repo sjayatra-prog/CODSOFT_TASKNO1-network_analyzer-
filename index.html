@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Packet Analyzer</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="header-content">
+                <h1><span class="highlight">Net</span>Analyzer</h1>
+                <div class="controls">
+                    <input type="text" id="filter-input" placeholder="Filter by IP, Protocol, Port..." autocomplete="off">
+                    <button id="toggle-capture" class="btn active">Capturing</button>
+                    <button id="clear-table" class="btn btn-secondary">Clear</button>
+                </div>
+            </div>
+            <div id="error-banner" class="error-banner hidden"></div>
+            <div class="stats-bar">
+                <div class="stat-item">Total Packets: <span id="total-count">0</span></div>
+                <div class="stat-item">TCP: <span id="tcp-count">0</span></div>
+                <div class="stat-item">UDP: <span id="udp-count">0</span></div>
+                <div class="stat-item">ICMP: <span id="icmp-count">0</span></div>
+            </div>
+        </header>
+        
+        <main class="table-container">
+            <table id="packet-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Source IP</th>
+                        <th>Src Port</th>
+                        <th>Dest IP</th>
+                        <th>Dst Port</th>
+                        <th>Protocol</th>
+                        <th>Length</th>
+                        <th>Payload Summary</th>
+                    </tr>
+                </thead>
+                <tbody id="packet-tbody">
+                    <!-- Packets dynamically inserted here -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
